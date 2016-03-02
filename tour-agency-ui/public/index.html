@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+  <title>Feefo plugin</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="shortcut icon" href="favicon.ico"/>
+  <!--<base href="/">-->
+
+  <!-- build:css({.tmp,public}) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:css({.tmp,public}) styles/main.css -->
+  <link rel="stylesheet" media="all" href="css/style.css">
+  <!-- endbuild -->
+
+</head>
+<body ng-app="tourAgencyApp">
+
+<!-- page container with header and main part -->
+<div class="container_wrapper">
+  <div class="header_wrapper">
+    <div ng-include src="'views/_core/header.html'"></div>
+  </div>
+  <div class="content_wrapper">
+    <div ng-view></div>
+  </div>
+</div>
+<!-- /page container with header and main part -->
+<div class="footer_wrapper">
+  <div ng-include src="'views/_core/footer.html'"></div>
+</div>
+
+<!-- build:js({.tmp,public}) scripts/vendor.js -->
+<!-- bower.js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/jquery-cron/cron/jquery-cron.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<!--<script src="bower_components/angular-clipboard/angular-clipboard.js"></script>-->
+<script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<!--<script src="bower_components/ng-file-upload-shim/ng-file-upload-shim.js"></script>-->
+<script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<!-- /bower.js -->
+<!-- endbuild -->
+
+<!-- build:js({.tmp,src,public}) scripts/scripts.js -->
+<!-- app scripts -->
+<!--<script src="media_modal/media-modal.js"></script>-->
+<script src="scripts/ta-config.js"></script>
+<script src="scripts/app.js"></script>
+<script src="scripts/config.js"></script>
+
+<!--<script src="scripts/_core/constants/media-modal.js"></script>-->
+<script src="scripts/_core/constants/views.js"></script>
+<script src="scripts/test-rest/test-rest.js"></script>
+<!-- /app scripts -->
+<!-- endbuild -->
+</body>
+</html>

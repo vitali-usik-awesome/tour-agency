@@ -1,0 +1,192 @@
+<div class="row content" ng-controller="ManualShopifyInstallCtrl">
+  <div class="manual_installation_wrapper" data-ng-if="!isLoading">
+
+    <div class="progress_bar_wrapper" data-ng-if="!didSomethingWentWrong">
+      <div class="progress_bar_steps">
+        <div class="progress_bar_steps_item">
+          <h2 class="progress_bar_steps_item_passed">1. ADD SERVICE WIDGET</h2> <!-- ng-class="{'active': curStep===1, 'past': curStep > 1}" -->
+        </div>
+        <div class="progress_bar_steps_item">
+          <h2 ng-class="{'progress_bar_steps_item_active': stepNum===2, 'progress_bar_steps_item_passed': stepNum > 2}">2. ADD PRODUCT REVIEWS</h2>
+        </div>
+        <div class="progress_bar_steps_item">
+          <h2 ng-class="{'progress_bar_steps_item_default': stepNum===2, 'progress_bar_steps_item_active': stepNum===3, 'progress_bar_steps_item_passed': stepNum > 3}">3. ADD PRODUCT RATING</h2>
+        </div>
+        <div class="progress_bar_steps_item">
+          <h2 ng-class="{'progress_bar_steps_item_default': stepNum < 4, 'progress_bar_steps_item_active': stepNum===4, 'progress_bar_steps_item_passed': stepNum > 4}">4. SET UP YOUR EMAILS</h2>
+        </div>
+      </div>
+      <div class="progress_bar">
+        <div class="progress_bar_item1 progress_bar_item_passed"></div>
+        <div class="progress_bar_item2" ng-class="{'progress_bar_item_active': stepNum===2, 'progress_bar_item_passed': stepNum > 2}"></div>
+        <div class="progress_bar_item3" ng-class="{'progress_bar_steps_item_default': stepNum===2, 'progress_bar_item_active': stepNum===3, 'progress_bar_item_passed': stepNum > 3}"></div>
+        <div class="progress_bar_item4" ng-class="{'progress_bar_steps_item_default': stepNum < 4, 'progress_bar_item_active': stepNum===4, 'progress_bar_item_passed': stepNum > 4}"></div>
+      </div>
+    </div>
+
+    <!-- step 2 -->
+    <div class="manual_install_step" data-ng-if="stepNum===2 && page2nav < 5">
+      <h2>Add product reviews</h2>
+      <!-- page 1 for step 2 -->
+      <div data-ng-if="page2nav === 1">
+        <p>From your Shopify admin, click <b>Online Store</b>, then click <b>Themes</b> (or press <span>G</span> <span>W</span> <span>T</span>).</p>
+        <div class="manual_install_img_wrapper">
+          <img src="../../../media/manual-2-1.gif" alt="welcome banner">
+        </div>
+      </div>
+      <!-- page 2 for step 2 -->
+      <div data-ng-if="page2nav === 2">
+        <p>Click the <b>...</b> menu, then click <b>Edit HTML/CSS</b>.</p>
+        <div class="manual_install_img_wrapper">
+          <img src="../../../media/manual-2-2.png" alt="welcome banner">
+        </div>
+      </div>
+      <!-- page 3 for step 2 -->
+      <div data-ng-if="page2nav === 3">
+        <p>On the <b>Edit HTML/CSS</b> page, select the <b>product.liquid</b> file.</p>
+        <div class="manual_install_img_wrapper">
+          <img src="../../../media/manual-2-3.png" alt="welcome banner">
+        </div>
+      </div>
+      <!-- page 4 for step 2 -->
+      <div data-ng-if="page2nav === 4">
+        <p><b>Copy</b> the following code and <b>paste</b> it after the <b>last line of code. Save</b> the file but don’t close it just yet.</p>
+        <div class="table_code_wrapper">
+          <table cellpadding="0" cellspacing="0">
+            <tr>
+              <td class="table_line_number tr_first">1</td>
+              <td class="table_code_line tr_first">&lt;div id="<i>feefo-product-review-widgetId</i>" class="<i>feefo-review-widget-product</i>"</td>
+            </tr>
+            <tr>
+              <td class="table_line_number">2</td>
+              <td class="table_code_line">data-feefo-product-id=<i ng-non-bindable>{{ product.id }}</i>></td>
+            </tr>
+            <tr>
+              <td class="table_line_number tr_last">3</td>
+              <td class="table_code_line tr_last">&lt;/div></td>
+            </tr>
+          </table>
+          <div class="copy_button_wrapper">
+            <button class="clr" clipboard text="copyReviews" data-ng-click="goTop()">Copy</button>
+          </div>
+        </div>
+        <div class="manual_install_img_wrapper manual_install_img_wrapper_with_code_copy">
+          <img src="../../../media/manual-2-4.png" alt="welcome banner">
+        </div>
+      </div>
+      <!-- controls -->
+      <div class="manual_controls_wrapper">
+        <div class="manual_start_over">
+          <a href="" data-ng-click="startOver()" title="Click here to start over"><i class="fa fa-long-arrow-left"></i>Start over</a>
+        </div>
+        <div class="manual_buttons clr">
+          <input class="manual_button_back" type="submit" value="Back" data-ng-click="goPrevPage()" data-ng-if="page2nav > 1">
+          <input type="submit" value="Next" data-ng-click="goNextPage()">
+        </div>
+      </div>
+      <div class="manual_install_line"></div>
+      <div class="manual_install_help">
+        <a href="mailto:technical@feefo.com?subject=Feefo Plugin Installation Issue" title="Click here if you need help"><i class="fa fa-life-ring"></i>I need help</a>
+      </div>
+    </div>
+
+    <!-- step 3 -->
+    <div class="manual_install_step" data-ng-if="stepNum === 3">
+      <h2>Add product rating</h2>
+      <p>In the same file - <b>product.liquid</b> - locate the <b>AddToCart</b> button and paste the following code below it. <b>Save</b> the file.</p>
+      <div class="table_code_wrapper">
+        <table cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="table_line_number tr_first tr_last">1</td>
+            <td class="table_code_line tr_first tr_last">&lt;div class="<i>feefo-review-badge-wrapper-product</i>">&lt;/div></td>
+          </tr>
+        </table>
+        <div class="copy_button_wrapper copy_button_wrapper_oneline">
+          <button class="clr" clipboard text="copyProductRating" data-ng-click="goTop()">Copy</button>
+        </div>
+      </div>
+      <div class="manual_install_img_wrapper manual_install_img_wrapper_with_code_copy">
+        <img src="../../../media/manual-3.png" alt="welcome banner">
+      </div>
+      <div class="manual_controls_wrapper">
+        <div class="manual_start_over">
+          <a href="" data-ng-click="startOver()" title="Click here to start over"><i class="fa fa-long-arrow-left"></i>Start over</a>
+        </div>
+        <div class="manual_buttons clr">
+          <input class="manual_button_back" type="submit" value="Back" data-ng-click="goStep2()">
+          <input type="submit" value="Next" data-ng-click="goStep4()">
+        </div>
+      </div>
+      <div class="manual_install_line"></div>
+      <div class="manual_install_help">
+        <a href="mailto:technical@feefo.com?subject=Feefo Plugin Installation Issue" title="Click here if you need help"><i class="fa fa-life-ring"></i>I need help</a>
+      </div>
+    </div>
+
+    <!-- step 4 -->
+    <div class="manual_install_step" data-ng-if="stepNum === 4">
+      <h2>Almost done ...</h2>
+      <p>From now on, the Feefo plugin will <b>capture each sale</b> after purchase and <b>send a feedback request after 7 days*</b></p>
+      <div class="manual_install_suggestion">
+        <div class="manual_install_check">
+          <div class="manual_install_check_box">
+            <input id="mail_checkbox" type="checkbox" ng-model="sendFeedback" ng-model="checked" ng-init="checked=true">
+            <label for="mail_checkbox"></label>
+          </div>
+          <div class="manual_install_check_desc clr">
+            <p>To start sending feedback requests right now, <b>go back 7 days and email my last 50 customers</b> from my store history**</p>
+          </div>
+        </div>
+        <p class="manual_install_comment">*You can amend this timeframe at any point through the settings section on Feefo.</p>
+        <p class="manual_install_comment">**Up to 50 sales which are over 7 days old and within a 30 day period. If you choose not to do this please be aware that you will not begin sending feedback request emails until 7 days after your first sale has been captured.</p>
+      </div>
+
+      <div class="manual_error_wrapper" data-ng-if="stepFourInError">
+        <p>We have experienced difficulty in retrieving your historical sales data, please continue with the installation and <a href="mailto:technical@feefo.com?subject=Feefo Plugin - Problem Fetching Historical Data" title="Contact us asking for help">contact us</a> for support in getting your historical data loaded.</p>
+      </div>
+
+      <div class="manual_controls_wrapper">
+        <div class="manual_start_over">
+          <a href="" data-ng-click="startOver()" title="Click here to start over"><i class="fa fa-long-arrow-left"></i>Start over</a>
+        </div>
+        <div class="manual_buttons clr">
+          <input class="manual_button_back" type="submit" value="Back" data-ng-click="goStep3()" data-ng-if="!disableBackButton">
+          <input type="submit" value="Next" data-ng-click="goFinish(sendFeedback)" data-ng-if="!stepFourInError">
+          <input type="submit" value="Continue Anyway" data-ng-click="goFinish(false)" data-ng-if="stepFourInError">
+        </div>
+      </div>
+      <div class="manual_install_line"></div>
+      <div class="manual_install_help">
+        <a href="mailto:technical@feefo.com?subject=Feefo Plugin Installation Issue" title="Click here if you need help"><i class="fa fa-life-ring"></i>I need help</a>
+      </div>
+    </div>
+
+    <!-- well done step -->
+    <div class="manual_install_done" data-ng-if="installDone">
+      <div class="manual_install_done_img_wrapper">
+        <img src="../../../media/well-done.png" alt="well done">
+      </div>
+      <h2>Well done!</h2>
+      <p>Great, everything is set up. You will start seeing ratings and reviews on your website, once you recieve your first review.</p>
+      <div class="manual_install_done_button">
+        <input type="submit" value="Go to your Dashboard" data-ng-click="goToDashboard()">
+      </div>
+      <p class="manual_install_done_message" data-ng-if="isNewUser">We’ve sent you an email with your temporary password, use it to log in.</p>
+    </div>
+    
+    <!-- well done step -->
+    <div class="manual_install_done" data-ng-if="didSomethingWentWrong">
+      <h2>Something went wrong...</h2>
+      <p>It seems like something went wrong with the automatic installation</p>
+      <div class="manual_install_suggestion">
+        <p>We will be happy to help if you <a href="mailto:technical@feefo.com?subject=Feefo Installation Issue" title="Contact us asking for help">contact support</a>. Alternatively you can try to <a href="" data-ng-click="restartInstallationInManualMode()" title="Click here to start manual installation">install manually</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="swirl_wrapper" data-ng-if="isLoading">
+    <div class="swirl">
+      <i class="fa fa-spinner fa-spin fa-5x"></i>
+    </div>
+  </div>
+</div>

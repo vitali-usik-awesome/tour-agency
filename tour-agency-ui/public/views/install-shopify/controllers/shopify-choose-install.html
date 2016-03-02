@@ -1,0 +1,35 @@
+<div class="row content" ng-controller="ChooseShopifyInstallCtrl">
+  <div class="choose_installation_wrapper" data-ng-if="!isLoading">
+    <h2>Plugin installation</h2>
+    <p>Installation should only take a couple of minutes</p>
+    <div class="choose_install_img_wrapper">
+      <img src="../../../media/welcome-banner.png" alt="welcome banner">
+    </div>
+    <div class="choose_install_button_wrapper">
+      <div>
+        <div class="choose_install_button">
+          <input type="button" value="Install automatically" data-ng-click="confirmAutoInstall()">
+        </div>
+        <p>Recommended if you haven’t made any changes to your theme.</p>
+        <p class="choose_install_p_with_link">If you have a customised theme you should <a href="" data-ng-click="startManualInstall()">install manually</a>.</p><!--installManually-->
+      </div>
+      <div class="choose_install_line"></div>
+      <div class="choose_install_order">
+        <p>As part of the installation process this application will capture order and customer details and modify theme templates by adding:</p>
+        <ul>
+          <li>- A JavaScript service review widget to your homepage</li>
+          <li>- XML Integrated product ratings and reviews to the relevant product pages</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="swirl_wrapper" data-ng-if="isLoading">
+    <div class="swirl">
+      <i class="fa fa-spinner fa-spin fa-5x"></i>
+    </div>
+    <div class="swirl_desc" data-ng-if="isAutoInstall">
+      <h2>Installing the Feefo plugin ...</h2>
+      <p>We are making changes to your theme, this should only take a couple of seconds</p>
+    </div>
+  </div>
+</div>

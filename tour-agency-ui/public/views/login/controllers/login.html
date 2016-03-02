@@ -1,0 +1,66 @@
+<div class="row content">
+  <div class="login_wrapper" data-ng-if="!isLoading">
+
+    <div class="login_form" data-ng-if="!toggleReset">
+      <h2>Welcome back!</h2>
+      <p>It seems like you are switching your eCommerce provider, please verify your Feefo account below to continue.</p>
+      <form name="loginForm" class="signInForm">
+        <div class="sign_form_field">
+          <div class="sign_form_field_input">
+            <input class="inputIsValid" type="email" id="loginEmail" name="loginEmail" maxlength="256" ng-model="shopInfo.pluginRegistratonForm.loginEmail" required/>
+            <span class="loginFormInvalid" ng-show="loginForm.loginEmail.$error.required">Please enter a valid email address!</span>
+            <span class="loginFormInvalid" ng-show="loginForm.loginEmail.$error.pattern || loginForm.loginEmail.$error.email">Enter a valid email format.</span>
+          </div>
+          <div class="sign_form_field_label">
+            <label for="loginEmail"><span>*</span>Email address</label>
+          </div>
+        </div>
+        <div class="sign_form_field">
+          <div class="sign_form_field_input">
+            <input class="inputIsValid" type="password" id="password" name="password" maxlength="256" ng-model="loginCredentials.pluginRegistratonForm.password" required/>
+            <span class="loginFormInvalid" ng-show="loginForm.password.$error.required">Please enter a password!</span>
+          </div>
+          <div class="sign_form_field_label">
+            <label for="password"><span>*</span>Password</label>
+          </div>
+        </div>
+
+        <div class="sign_form_field_submit">
+          <div class="sign_submit_wrapper">
+            <input type="submit" value="Verify account" ng-click="login()" ng-disabled="loginForm.$invalid">
+            <p><a href="javascript:void(0)" data-ng-click="showReset('show')">Forgot your password?</a></p>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="login_form" data-ng-if="toggleReset">
+      <h2>Request Password Reset</h2>
+      <form name="resetForm" class="signInForm">
+        <div class="sign_form_field">
+          <div class="sign_form_field_input">
+            <input class="inputIsValid" type="email" id="resetEmail" name="resetEmail" maxlength="256" ng-model="resetEmail" required/>
+            <span class="loginFormInvalid" ng-show="resetForm.resetEmail.$error.required">Please enter a valid email address!</span>
+            <span class="loginFormInvalid" ng-show="resetForm.resetEmail.$error.pattern || resetForm.resetEmail.$error.email">Enter a valid email format.</span>
+          </div>
+          <div class="sign_form_field_label">
+            <label for="resetEmail"><span>*</span>Registered Email Address</label>
+          </div>
+        </div>
+        <div class="sign_form_field_submit">
+          <div class="sign_submit_wrapper">
+            <input type="submit" value="Reset Password" ng-click="resetPassword(resetEmail)" ng-disabled="resetForm.$invalid">
+            <p data-ng-if="showBackToLogin"><a href="javascript:void(0)" data-ng-click="backToLogin()">Back to login</a></p>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+  <div class="swirl_wrapper" data-ng-if="isLoading">
+    <div class="swirl">
+      <i class="fa fa-spinner fa-spin fa-5x"></i>
+    </div>
+  </div>
+</div>

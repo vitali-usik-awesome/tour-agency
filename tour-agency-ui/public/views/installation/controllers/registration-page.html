@@ -1,0 +1,133 @@
+<div class="row content" ng-controller="InstallFormCtrl">
+  <div class="installation_form_wrapper"  data-ng-if="!isLoading">
+    <h2>Confirm your store details</h2>
+    <p>We need this information to create your account on Feefo.</p>
+    <form name="autoForm" class="installation_form" novalidate>
+
+      <div class="image_form_field" ng-controller="LogoCtrl">
+        <div class="image_block_wrapper">
+          <div class="img_preview_wrapper">
+            <img id="merchant-logo-preview"  data-ng-src="/pluginApi/merchant-image/{{shopInfo.pluginRegistratonForm.logo}}?{{reloadCache}}" alt="Logo">
+          </div>
+          <div class="img_change_wrapper">
+            <p><label for="uploadImg">Change store logo</label></p>
+            <small>200 x 132px recommended</small>
+            <input id="uploadImg" type="file" class="hidden" ngf-select="uploadFiles($file, 'logo')" ng-model="picFile" accept="image/*">
+          </div>
+        </div>
+      </div>
+
+      <div class="form_field">
+        <div class="form_field_input">
+          <input class="inputIsValid" type="text" id="name" name="storeName" placeholder="E-commerce store name" ng-model="shopInfo.pluginRegistratonForm.name" maxlength="256" value="{{shopInfo.name}}" required/>
+          <span class="autoFormInvalid" ng-show="autoForm.storeName.$error.required">Please enter a store name!</span>
+        </div>
+        <div class="form_field_label">
+          <label for="name"><span>*</span>Store Name</label>
+        </div>
+      </div>
+      <div class="form_field">
+        <div class="form_field_input">
+          <input class="inputIsValid" type="text" id="url" name="url" placeholder="E-commerce store URL" ng-model="shopInfo.pluginRegistratonForm.url" maxlength="320" value="{{shopInfo.url}}" required disabled/>
+          <span class="autoFormInvalid" ng-show="autoForm.url.$error.required">Please enter a URL!</span>
+        </div>
+        <div class="form_field_label">
+          <label for="url"><span>*</span>Store URL</label>
+        </div>
+      </div>
+      <div class="form_field">
+        <div class="form_field_input">
+          <select class="selectIsValid" id="industry" name="industry" ng-model="shopInfo.pluginRegistratonForm.industry" ng-options="industry.value as industry.label for industry in industries" required>
+            <option value="" disabled>(Select One)</option>
+          </select>
+          <small>This will help consumers search for your company on Feefo’s website.</small>
+          <span class="autoFormInvalid" ng-show="autoForm.industry.$error.required">Please select a business industry!</span>
+        </div>
+        <div class="form_field_label">
+          <label for="industry"><span>*</span>Business Industry</label>
+        </div>
+      </div>
+      <div class="form_field">
+        <div class="form_field_input">
+          <textarea id="description" ng-model="shopInfo.pluginRegistratonForm.description"></textarea>
+          <small>This will be displayed on your merchant page on the Feefo website.</small>
+        </div>
+        <div class="form_field_label">
+          <label for="description">Store Description</label>
+        </div>
+      </div>
+      <!-- fullName -->
+      <div class="form_field">
+        <div class="form_field_input">
+          <input class="inputIsValid" type="text" placeholder="E-commerce contact full name" id="fullName" name="fullName" ng-model="shopInfo.pluginRegistratonForm.fullName" maxlength="128" value="{{shopInfo.fullName}}" required/>
+          <span class="autoFormInvalid" ng-show="autoForm.fullName.$error.required">Please enter a name!</span>
+        </div>
+        <div class="form_field_label">
+          <label for="fullName"><span>*</span>Contact Name</label>
+        </div>
+      </div>
+
+      <div class="form_field">
+        <div class="form_field_input">
+          <input class="inputIsValid" type="email" placeholder="E-commerce contact e-mail" id="loginEmail" name="loginEmail" ng-model="shopInfo.pluginRegistratonForm.loginEmail" maxlength="320" value="{{shopInfo.email}}" required disabled/>
+          <span class="autoFormInvalid" ng-show="autoForm.loginEmail.$error.required">Please enter an email!</span>
+          <span class="autoFormInvalid" ng-show="autoForm.loginEmail.$error.pattern || autoForm.loginEmail.$error.email">Enter a valid email format.</span>
+        </div>
+        <div class="form_field_label">
+          <label for="loginEmail"><span>*</span>Contact Email</label>
+        </div>
+      </div>
+
+      <div class="form_field">
+        <div class="form_field_input">
+          <input class="inputIsValid" type="text" placeholder="E-commerce contact phone" id="phone" name="phone" ng-model="shopInfo.pluginRegistratonForm.phone" maxlength="10" value="{{shopInfo.phone}}" required/>
+          <span class="autoFormInvalid" ng-show="autoForm.phone.$error.required">Please enter a phone!</span>
+        </div>
+        <div class="form_field_label">
+          <label for="phone"><span>*</span>Contact Phone</label>
+        </div>
+      </div>
+
+      <div data-ng-if="isExistingAccount">
+
+        <div class="form_field_line">
+          <div class="line_wrapper">
+            <div class="image_form_line"></div>
+            <p>This email address is already registered, enter your Feefo password to continue.</p>
+          </div>
+        </div>
+
+        <div class="form_field">
+          <div class="form_field_input">
+            <input class="inputIsValid" type="password" id="password" name="password" ng-model="shopInfo.pluginRegistratonForm.password" required/>
+            <div class="password_invalid_reset_wrapper">
+              <span class="autoFormInvalidPass" ng-show="autoForm.password.$error.required">Please enter a password!</span>
+              <span class="autoFormResetPass"><a href="" data-ng-click="forgotPassword()">Forgot password?</a></span>
+            </div>
+          </div>
+          <div class="form_field_label">
+            <label for="password"><span>*</span>Password</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form_field_submit">
+        <div class="submit_wrapper">
+          <input type="submit" value="Continue installation" ng-click="goAhead()" ng-disabled="autoForm.$invalid">
+        </div>
+      </div>
+      <div class="form_field_submit">
+        <div class="submit_wrapper">
+          <p>By clicking Continue installation, you agree to our <br><a href="" data-ng-click="open()">Terms and Conditions</a>.</p>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="swirl_wrapper" data-ng-if="isLoading">
+    <div class="swirl">
+      <i class="fa fa-spinner fa-spin fa-5x"></i>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,128 @@
+<div class="row content">
+  <div class="col-xs-8 col-xs-offset-2">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt mollis purus nec consectetur. Suspendisse id lectus augue. Suspendisse id aliquam augue, imperdiet accumsan massa. Duis
+      at eleifend nisi. Maecenas odio neque, auctor at quam at, vulputate eleifend massa. Duis ultrices sem id pulvinar semper. Donec pretium elit ut posuere congue. Mauris ac enim sed erat porta
+      vehicula. Nam at est leo. Ut congue, sem at viverra euismod, ipsum augue feugiat mi, id ornare enim dui sed odio. Vivamus et suscipit mi. Integer sed nibh consequat, lacinia diam ac, tempus leo.
+      Cras a aliquam dolor, ac rutrum erat. Praesent interdum elit ac nunc bibendum sodales.</p>
+
+    <p>Please specify here e-commerce platform where you run your store.</p>
+
+    <div class="platform_wrapper">
+      <p><span>*</span>E-commerce Platform:
+        <select ng-model="platform_model" ng-options="platform.name for platform in platforms">
+          <option value="" disabled>(Select Platform)</option>
+        </select>
+      </p>
+      <div ng-show="platform_model.url">
+        <p>Here is a link for plugin for your system: <a href="{{platform_model.url}}">{{platform_model.url}}</a></p>
+        <input ng-model="platform_model.url" style="width: 100%;"/>
+      </div>
+      <div ng-show="platform_model.name === 'other'">
+        <form name="manualForm" novalidate ng-controller="InstallFormCtrl">
+          <div class="main_form">
+            <p>We do not have plugin solution for your system just yet, but we prepared manual instructions which will guide you and help you to do it manually and our support team is happy to help.</p>
+
+            <div class="field">
+              <div class="field_label">
+                <label for="eplatform">Other E-commerce platform:</label>
+              </div>
+              <div class="field_input">
+                <input type="text" id="eplatform" ng-model="shopInfo.eplatform"/>
+              </div>
+            </div>
+            <div class="field">
+              <div class="field_label">
+                <label for="name"><span>*</span>Store Name:</label>
+              </div>
+              <div class="field_input">
+                <input type="text" id="name" ng-model="shopInfo.name" value="{{shopInfo.name}}" required/>
+              </div>
+            </div>
+            <div class="field">
+              <div class="field_label">
+                <label for="url"><span>*</span>Store URL:</label>
+              </div>
+              <div class="field_input">
+                <input type="url" id="url" ng-model="shopInfo.url" value="{{shopInfo.url}}" required/>
+              </div>
+            </div>
+            <div class="field">
+              <div class="field_label">
+                <label for="industry"><span>*</span>Business Industry:</label>
+              </div>
+              <div class="field_input">
+                <select id="industry" ng-model="shopInfo.industry" required>
+                  <option value="" selected>Other</option>
+                  <option value="Business 1">Business 1</option>
+                  <option value="Business 2">Business 2</option>
+                  <option value="Business 3">Business 3</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <div class="field_label">
+                <label for="description">Store Description:</label>
+              </div>
+              <div class="field_input">
+                <textarea id="description" ng-model="shopInfo.description" cols="32">
+                  <!-- -->
+                </textarea><br>
+                <small>This is how your buyers know what you sell</small>
+              </div>
+            </div>
+            <div class="field">
+              <div class="field_label">
+                <label>Store Logo:</label>
+              </div>
+              <div class="field_input" ng-controller="LogoCtrl">
+                <button ng-hide="picFile != null" type="file" ngf-select="uploadFiles($file, $invalidFiles)" ng-model="picFile" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">Browse</button>
+                <div ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="img_preview_wrapper">
+                  <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile">
+                  <button type="file" class="btnaslink" ngf-select="uploadFiles($file, $invalidFiles)" ng-model="picFile" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">Change Logo Image</button>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="field_label">
+                <label for="firstName"><span>*</span>Contact First Name:</label>
+              </div>
+              <div class="field_input">
+                <input type="text" placeholder="E-commerce contact first name" id="firstName" ng-model="shopInfo.firstName" value="{{shopInfo.firstName}}" required/>
+              </div>
+            </div>
+            <div class="field">
+              <div class="field_label">
+                <label for="lastName"><span>*</span>Contact Last Name:</label>
+              </div>
+              <div class="field_input">
+                <input type="text" placeholder="E-commerce contact last name" id="lastName" ng-model="shopInfo.lastName" value="{{shopInfo.lastName}}" required/>
+              </div>
+            </div>
+            <div class="field">
+              <div class="field_label">
+                <label for="email"><span>*</span>Contact Email:</label>
+              </div>
+              <div class="field_input">
+                <input type="email" placeholder="E-commerce contact e-mail" id="email" ng-model="shopInfo.email" value="{{shopInfo.email}}" required/>
+              </div>
+            </div>
+            <div class="field">
+              <div class="field_label">
+                <label for="phone"><span>*</span>Contact Phone</label>
+              </div>
+              <div class="field_input">
+                <input type="text" placeholder="E-commerce contact phone" id="phone" ng-model="shopInfo.phone" value="{{shopInfo.phone}}" required/>
+              </div>
+            </div>
+            <div class="form_submit">
+              <input type="submit" value="Go Ahead!" ng-disabled="manualForm.$invalid" ng-click="goAhead()">
+            </div>
+
+            <p>By clicking "Go Ahead", you agree to our <a href="">Terms</a> and <a href="">Data Policy</a> , including our <a href="">Cookie Use</a>.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

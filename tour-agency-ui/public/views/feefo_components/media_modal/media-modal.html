@@ -1,0 +1,107 @@
+<!-- Header -->
+<div class="modal-header">
+  <button
+    type="button"
+    class="close"
+    data-dismiss="modal"
+    aria-hidden="true"
+    data-ng-click="dismissModal()">&times;</button>
+  <h4
+    class="modal-title"
+    data-ng-bind-html="product.name || product.sku"></h4>
+
+  <!-- Media Carousel -->
+  <div class="fw-media-carousel">
+    <!-- Previous button -->
+    <div class="fw-media-carousel-previous">
+      <i class="fa fa-chevron-left"></i>
+    </div>
+    <!-- Media items -->
+    <div
+      data-ng-if="resources.length"
+      class="fw-media-carousel-items">
+      <slick
+        data-prev-arrow=".fw-media-carousel-previous"
+        data-next-arrow=".fw-media-carousel-next"
+        data-touch-move="false"
+        data-infinite="false"
+        data-swipe-to-slide="false"
+        data-slides-to-show="6"
+        data-slides-to-scroll="3"
+        data-init-onload="true"
+        data-data="resources"
+        class="slider multiple-items">
+        <div
+          class="fw-media-carousel-item"
+          data-ng-repeat="resource in resources track by $index"
+          data-ng-click="selectMediaItem($index)"
+          data-ng-class="{ 'active' : $index === selectedItem }">
+          <!-- Media type icon -->
+          <div
+            class="fw-media-carousel-item-type">
+            <i
+              class="fa"
+              data-ng-class="{ 'fa-camera': resource.mediaType === 'IMAGE', 'fa-video-camera': resource.mediaType === 'VIDEO' }"></i>
+            <span
+              data-ng-if="resource.videoDuration"
+              data-ng-class="{'video-duration': resource.mediaType === 'VIDEO' }">
+              <span data-ng-bind-html="resource.videoDuration"></span>s
+            </span>
+          </div>
+
+          <!-- Inactive overlay -->
+          <div
+            data-ng-show="$index !== selectedItem"
+            class="fw-media-carousel-item-overlay"></div>
+
+          <!-- Thumbnail -->
+          <img data-ng-src="{{ resource.thumbnailUrl }}"/>
+        </div>
+      </slick>
+    </div>
+
+    <!-- Next button -->
+    <div class="fw-media-carousel-next">
+      <i class="fa fa-chevron-right"></i>
+    </div>
+  </div>
+</div>
+
+<!-- Body -->
+<div class="modal-body">
+  <!-- Media Display -->
+  <div
+    class="fw-media-display"
+    data-ng-show="$index === selectedItem"
+    data-ng-repeat="item in resources track by $index"
+    data-ng-class="{ 'fw-media-display-video-container': item.mediaType === 'VIDEO', 'fw-media-display-image-container': item.mediaType === 'IMAGE' }">
+    <!-- Vide output -->
+    <iframe
+      class="fw-media-display-video vzaar-video-player"
+      data-ng-if="item.mediaType === 'VIDEO'"
+      data-ng-src="{{ item.src }}"
+
+      allowFullScreen
+      mozallowfullscreen
+      webkitAllowFullScreen
+      allowTransparency="true"
+
+      frameborder="0"
+      title="item.caption"
+      type="text/html"></iframe>
+
+    <!-- Image output -->
+    <img
+      class="fw-media-display-image"
+      data-ng-if="item.mediaType === 'IMAGE'"
+      data-ng-src="{{ item.src }}">
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="modal-footer">
+  <fw-product-caption-actions
+    data-fw-product-feedback-id="product.productFeedback.id"
+    data-fw-sale="sale"
+    data-fw-resource="resources[selectedItem]"></fw-product-caption-actions>
+</div>

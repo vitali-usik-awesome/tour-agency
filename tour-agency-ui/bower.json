@@ -1,0 +1,24 @@
+{
+  "name": "tour-agency-ui",
+  "version": "0.0.0",
+  "dependencies": {
+    "jquery": "2.1.4",
+    "jquery-cron": "0.1.4",
+    "angular": "1.4.8",
+    "angular-route": "1.4.8",
+    "angular-loader": "1.4.8",
+    "angular-mocks": "1.4.8",
+    "angular-resource": "1.4.8",
+    "angular-toastr": "1.6.0",
+    "ng-file-upload-shim": "10.0.2",
+    "ng-file-upload": "10.0.2",
+    "bootstrap": "3.3.5",
+    "font-awesome": "4.3.0",
+    "angular-bootstrap": "0.13.4",
+    "angular-animate": "1.4.8",
+    "angular-sanitize": "1.4.8"
+  },
+  "resolutions": {
+    "angular": "1.4.8"
+  }
+}
